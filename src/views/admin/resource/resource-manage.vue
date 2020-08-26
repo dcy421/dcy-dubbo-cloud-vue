@@ -23,7 +23,7 @@
         <el-tag type="error" v-if="row.resStatus === '1'">禁用</el-tag>
       </template>
       <template slot-scope="{ row }" slot="action">
-        <el-button @click="addModule(row)" type="text">添加</el-button>
+        <el-button @click="addResource(row)" type="text">添加</el-button>
         <el-button @click="update(row)" type="text">修改</el-button>
         <el-button @click="remove(row)" v-if="row.children.length === 0" type="text">删除</el-button>
       </template>
@@ -86,12 +86,12 @@
 
 <script>
   import DcyTable from '_c/dcy/dcy-table'
-  import {addModule, deleteModuleById, updateModule} from '_a/admin/resource/module'
+  import {addResource, deleteResourceById, updateResource} from '_a/admin/resource/module'
   import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
   import {mapActions} from "vuex";
 
   export default {
-    name: 'module-manage',
+    name: 'resource-manage',
     components: { DcyTable },
     data() {
       return {
@@ -130,7 +130,7 @@
       /**
        * 添加弹出框
        */
-      addModule(row) {
+      addResource(row) {
         this.form = {};
         if (row.resType === '1') {
           this.$message.error('操作类型下面不可以在添加子节点！')
@@ -158,7 +158,7 @@
        */
       remove(row) {
         ConfirmCustom({ type: 'warning' }).then(() => {
-          deleteModuleById(row.id).then(res => {
+          deleteResourceById(row.id).then(res => {
             if (res.data) {
               MessageSuccess('del')
             } else {
@@ -185,7 +185,7 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
             if (this.dialogTitle === '添加模块') {
-              addModule(this.form).then(res => {
+              addResource(this.form).then(res => {
                 if (res.data) {
                   MessageSuccess('add')
                 } else {
@@ -194,7 +194,7 @@
                 this.cancelDialogAndRefresh()
               })
             } else {
-              updateModule(this.form).then(res => {
+              updateResource(this.form).then(res => {
                 if (res.data) {
                   MessageSuccess('upd')
                 } else {

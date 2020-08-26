@@ -5,7 +5,7 @@ import axios from '_l/api.request'
  * @param module
  * @returns {ClientHttp2Stream | * | AxiosPromise<any> | ClientRequest | void}
  */
-export const addModule = (module) => {
+export const addResource = (module) => {
   return axios.request({
     url: '/admin-center/resources/save',
     method: 'post',
@@ -18,7 +18,7 @@ export const addModule = (module) => {
  * @param module
  * @returns {ClientHttp2Stream | * | AxiosPromise<any> | ClientRequest | void}
  */
-export const updateModule = (module) => {
+export const updateResource = (module) => {
   return axios.request({
     url: '/admin-center/resources/update',
     method: 'post',
@@ -31,7 +31,7 @@ export const updateModule = (module) => {
  * @param moduleId
  * @returns {ClientHttp2Stream | * | AxiosPromise<any> | ClientRequest | void}
  */
-export const deleteModuleById = (moduleId) => {
+export const deleteResourceById = (moduleId) => {
   return axios.request({
     url: '/admin-center/resources/delete',
     method: 'post',
@@ -46,7 +46,7 @@ export const deleteModuleById = (moduleId) => {
  * @param moduleIds
  * @returns {ClientHttp2Stream | * | AxiosPromise<any> | ClientRequest | void}
  */
-export const deleteBatchModuleById = (moduleIds) => {
+export const deleteBatchResourceById = (moduleIds) => {
   return axios.request({
     url: '/admin-center/resources/deleteBatch',
     method: 'post',

@@ -124,10 +124,10 @@ export const asyncRoutes = [
         meta: { title: '角色管理', icon: 'user', noCache: true }
       },
       {
-        path: 'module-manage',
-        component: () => import('@/views/admin/resource/module-manage'),
-        name: 'module-manage',
-        meta: { title: '模块管理', icon: 'user', noCache: true }
+        path: 'resource-manage',
+        component: () => import('@/views/admin/resource/resource-manage'),
+        name: 'resource-manage',
+        meta: { title: '资源管理', icon: 'user', noCache: true }
       },
       {
         path: 'dict-manage',
