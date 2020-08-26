@@ -131,6 +131,7 @@
        * 添加弹出框
        */
       addModule(row) {
+        this.form = {};
         if (row.resType === '1') {
           this.$message.error('操作类型下面不可以在添加子节点！')
         } else {

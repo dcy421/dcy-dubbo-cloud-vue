@@ -106,6 +106,7 @@
        * 添加弹出框
        */
       addDict(row) {
+        this.form = {};
         this.selTreeNode = {...row};
         this.dialogTitle = '添加字典';
         this.form.parentId = this.selTreeNode.id;

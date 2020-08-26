@@ -224,6 +224,7 @@
        * 添加弹出框
        */
       addUser() {
+        this.form = {};
         this.form.password = null
         this.form.userType = 1
         this.dialogTitle = '添加用户'

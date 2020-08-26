@@ -147,6 +147,7 @@
        * 添加弹出框
        */
       addRole() {
+        this.form = {};
         this.dialogTitle = '添加角色'
         this.dialogShow = true
       },
