@@ -4,8 +4,8 @@
     <!-- 表格 -->
     <dcy-table
       ref="dcyTable"
-      url="dict/getDictTreeTableList"
-      row-key="dictId"
+      url="/admin-center/dict/getDictTreeTableList"
+      row-key="id"
       :page-ing-type="false"
       default-expand-all
       :check-box="false"
@@ -57,8 +57,8 @@
 
 <script>
   import DcyTable from '_c/dcy/dcy-table'
-  import { addDict, deleteBatchDictById, deleteDictById, updateDict } from '_a/admin/dict/dict'
-  import { MessageError, MessageSuccess, ConfirmCustom } from '_l/message'
+  import {addDict, deleteDictById, updateDict} from '_a/admin/dict/dict'
+  import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
 
   export default {
     name: 'dict-manage',
@@ -73,9 +73,9 @@
       };
       return {
         columns: [
-          { label: '字典名称', prop: 'dictLable',align:'left',width:'300'},
+          { label: '字典名称', prop: 'dictLabel',align:'left',width:'300'},
           { label: '字典键值', prop: 'dictValue' },
-          { label: '排序', prop: 'location' },
+          { label: '排序', prop: 'dictSort' },
           { label: '子类型', prop: 'type' },
           { label: '操作', slot: 'action' }
         ],
@@ -108,7 +108,7 @@
       addDict(row) {
         this.selTreeNode = {...row};
         this.dialogTitle = '添加字典';
-        this.form.parentId = this.selTreeNode.dictId;
+        this.form.parentId = this.selTreeNode.id;
         this.form.parentName = this.selTreeNode.dictLable;
         let childList = [];
         if (this.selTreeNode.children){
@@ -128,9 +128,9 @@
         }
         //
         if (this.selTreeNode.parentIds !== null){
-          this.form.parentIds = this.selTreeNode.parentIds + ',' + this.selTreeNode.dictId;
+          this.form.parentIds = this.selTreeNode.parentIds + ',' + this.selTreeNode.id;
         }else{
-          this.form.parentIds = this.selTreeNode.dictId;
+          this.form.parentIds = this.selTreeNode.id;
         }
         this.dialogShow = true;
       },
@@ -149,7 +149,7 @@
        */
       remove(row) {
         ConfirmCustom({ type: 'warning' }).then(() => {
-          deleteDictById(row.dictId).then(res => {
+          deleteDictById(row.id).then(res => {
             if (res.data) {
               MessageSuccess('del')
             } else {

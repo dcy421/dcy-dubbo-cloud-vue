@@ -124,12 +124,6 @@ export const asyncRoutes = [
         meta: { title: '角色管理', icon: 'user', noCache: true }
       },
       {
-        path: 'power-manage',
-        component: () => import('@/views/admin/power-manage'),
-        name: 'power-manage',
-        meta: { title: '权限管理', icon: 'user', noCache: true }
-      },
-      {
         path: 'module-manage',
         component: () => import('@/views/admin/resource/module-manage'),
         name: 'module-manage',
@@ -146,18 +140,8 @@ export const asyncRoutes = [
         component: Layout,
         children: [
           {
-            path: 'http://localhost:8999/web/swagger-ui.html',
+            path: 'http://localhost:15000/swagger-ui.html',
             meta: { 'title': 'swagger文档', 'icon': 'link' }
-          }
-        ]
-      },
-      {
-        path: 'druid',
-        component: Layout,
-        children: [
-          {
-            path: 'http://localhost:8999/web/druid/login.html',
-            meta: { 'title': 'druid监控', 'icon': 'link' }
           }
         ]
       }
