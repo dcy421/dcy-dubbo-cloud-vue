@@ -2,9 +2,9 @@
   <div class="app-container">
 
     <!-- 表格 -->
-    <dcy-table
-      ref="dcyTable"
-      url="/admin-center/resources/getResourceTreeTableList"
+    <table-page
+      ref="tablePage"
+      :url="tableUrl"
       row-key="id"
       :page-ing-type="false"
       default-expand-all
@@ -27,7 +27,7 @@
         <el-button @click="update(row)" type="text">修改</el-button>
         <el-button @click="remove(row)" v-if="row.children.length === 0" type="text">删除</el-button>
       </template>
-    </dcy-table>
+    </table-page>
 
     <!-- 添加表单 -->
     <el-dialog
@@ -85,16 +85,17 @@
 </template>
 
 <script>
-  import DcyTable from '_c/dcy/dcy-table'
   import {addResource, deleteResourceById, updateResource} from '_a/admin/resource/module'
   import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
   import {mapActions} from "vuex";
+  import TablePage from "_c/CommonForm/table-page";
 
   export default {
     name: 'resource-manage',
-    components: { DcyTable },
+    components: {TablePage },
     data() {
       return {
+        tableUrl:'/admin-center/resources/getResourceTreeTableList',
         columns: [
           { label: '名称', prop: 'resName', align: 'left', width: '400' },
           { label: '类型', slot: 'resType' },
@@ -125,7 +126,7 @@
        * 刷新
        */
       refresh() {
-        this.$refs.dcyTable.refresh()
+        this.$refs.tablePage.refresh()
       },
       /**
        * 添加弹出框

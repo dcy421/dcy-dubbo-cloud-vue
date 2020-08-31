@@ -2,9 +2,9 @@
   <div class="app-container">
 
     <!-- 表格 -->
-    <dcy-table
-      ref="dcyTable"
-      url="/admin-center/dict/getDictTreeTableList"
+    <table-page
+      ref="tablePage"
+      :url="tableUrl"
       row-key="id"
       :page-ing-type="false"
       default-expand-all
@@ -15,7 +15,7 @@
         <el-button @click="update(row)" type="text">修改</el-button>
         <el-button @click="remove(row)" v-if="row.children.length === 0" type="text">删除</el-button>
       </template>
-    </dcy-table>
+    </table-page>
 
     <!-- 添加表单 -->
     <el-dialog
@@ -56,13 +56,13 @@
 </template>
 
 <script>
-  import DcyTable from '_c/dcy/dcy-table'
   import {addDict, deleteDictById, updateDict} from '_a/admin/dict/dict'
   import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
+  import TablePage from "_c/CommonForm/table-page";
 
   export default {
     name: 'dict-manage',
-    components: { DcyTable },
+    components: {TablePage },
     data() {
       const validateLocation = (rule, value, callback) => {
         if (value === '') {
@@ -72,6 +72,7 @@
         }
       };
       return {
+        tableUrl:'/admin-center/dict/getDictTreeTableList',
         columns: [
           { label: '字典名称', prop: 'dictLabel',align:'left',width:'300'},
           { label: '字典键值', prop: 'dictValue' },
@@ -100,7 +101,7 @@
        * 刷新
        */
       refresh() {
-        this.$refs.dcyTable.refresh()
+        this.$refs.tablePage.refresh()
       },
       /**
        * 添加弹出框

@@ -19,7 +19,7 @@
 
 <script>
   export default {
-    name: "dcy-avatar-upload",
+    name: "avatar-upload",
     data() {
       return {
         imageUrl: ''

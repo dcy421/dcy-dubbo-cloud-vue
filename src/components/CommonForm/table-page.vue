@@ -138,7 +138,7 @@
   import { getModulesTables } from '@/api/common'
 
   export default {
-    name: 'dcy-table',
+    name: 'table-page',
     data() {
       return {
         // 表格配置相关

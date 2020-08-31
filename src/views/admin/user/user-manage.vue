@@ -14,9 +14,9 @@
     </el-form>
 
     <!-- 表格 -->
-    <dcy-table
-      ref="dcyTable"
-      url="/admin-center/user/page"
+    <table-page
+      ref="tablePage"
+      :url="tableUrl"
       :columns="columns"
       :query-params="queryParams"
       @table-select-val="selectVal"
@@ -35,7 +35,7 @@
         <el-button @click="resetPassword(row)" type="text">重置密码</el-button>
         <el-button @click="authRole(row)" type="text">授权角色</el-button>
       </template>
-    </dcy-table>
+    </table-page>
 
     <el-dialog :title="dialogTitle" :visible.sync="dialogShow" :close-on-click-modal="false"
                @close="handleReset('form')">
@@ -104,7 +104,6 @@
 </template>
 
 <script>
-  import DcyTable from '_c/dcy/dcy-table'
   import {
     addUserInfo,
     deleteBatchUserInfoById,
@@ -117,13 +116,12 @@
   } from '_a/admin/user/user'
   import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
   import {getRoleAllList} from '_a/admin/role/role'
-  import DcyFileUpload from '_c/dcy/dcy-file-upload'
-  import DcyAvatarUpload from '_c/dcy/dcy-avatar-upload'
   import {mapActions} from "vuex";
+  import TablePage from "_c/CommonForm/table-page";
 
   export default {
     name: 'user-manage',
-    components: { DcyAvatarUpload, DcyFileUpload, DcyTable },
+    components: {TablePage},
     data() {
       const validateUsernameCount = (rule, value, callback) => {
         if (value !== '') {
@@ -152,6 +150,7 @@
         }
       }
       return {
+        tableUrl:'/admin-center/user/page',
         columns: [
           { label: '用户名', prop: 'username', sortable: 'custom' },
           { label: '昵称', prop: 'nickName' },
@@ -212,7 +211,7 @@
        * 刷新
        */
       refresh() {
-        this.$refs.dcyTable.refresh()
+        this.$refs.tablePage.refresh()
       },
       /**
        * 重置搜索条件

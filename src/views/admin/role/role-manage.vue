@@ -14,9 +14,9 @@
     </el-form>
 
     <!-- 表格 -->
-    <dcy-table
-      ref="dcyTable"
-      url="/admin-center/role/page"
+    <table-page
+      ref="tablePage"
+      :url="tableUrl"
       :columns="columns"
       :query-params="queryParams"
       @table-select-val="selectVal">
@@ -29,7 +29,7 @@
         <el-button @click="remove(row)" type="text">删除</el-button>
         <el-button @click="authModule(row)" type="text">授权</el-button>
       </template>
-    </dcy-table>
+    </table-page>
 
     <!-- 添加表单 -->
     <el-dialog
@@ -71,7 +71,7 @@
       <el-tree
         :data="moduleData"
         node-key="id"
-        ref="dcyModuleTree"
+        ref="moduleTree"
         default-expand-all
         :default-checked-keys="defModuleIds"
         :props="{
@@ -89,17 +89,18 @@
 </template>
 
 <script>
-  import DcyTable from '_c/dcy/dcy-table'
   import {addRole, deleteBatchRoleById, deleteRoleById, saveAuthResource, updateRole} from '_a/admin/role/role'
   import {ConfirmCustom, MessageError, MessageSuccess} from '_l/message'
   import {mapActions, mapGetters} from "vuex";
   import {getResourceTreeList, getResourceTreeTableList} from "_a/admin/resource/module";
+  import TablePage from "_c/CommonForm/table-page";
 
   export default {
     name: 'role-manage',
-    components: { DcyTable },
+    components: {TablePage },
     data() {
       return {
+        tableUrl:'/admin-center/role/page',
         columns: [
           { label: '名称', prop: 'roleName' },
           { label: '权限字符', prop: 'roleKey' },
@@ -135,7 +136,7 @@
        * 刷新
        */
       refresh() {
-        this.$refs.dcyTable.refresh()
+        this.$refs.tablePage.refresh()
       },
       /**
        * 重置搜索条件
@@ -262,7 +263,7 @@
       saveAuthModule() {
         // 获取选中及半选节点
         let resIds = []
-        this.$refs.dcyModuleTree.getCheckedNodes(false,false).forEach(e => {
+        this.$refs.moduleTree.getCheckedNodes(false,false).forEach(e => {
           resIds.push(e.id)
         })
         let roleResourceDto = {

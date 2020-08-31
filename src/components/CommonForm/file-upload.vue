@@ -31,7 +31,7 @@
 
 <script>
   export default {
-    name: "dcy-file-upload",
+    name: "file-upload",
     data() {
       return {
         /*fileListObj: [{
