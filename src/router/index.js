@@ -112,6 +112,12 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'dept-manage',
+        component: () => import('@/views/admin/dept/dept-manage'),
+        name: 'dept-manage',
+        meta: { title: '部门管理', icon: 'user', noCache: true }
+      },
+      {
         path: 'user-manage',
         component: () => import('@/views/admin/user/user-manage'),
         name: 'user-manage',

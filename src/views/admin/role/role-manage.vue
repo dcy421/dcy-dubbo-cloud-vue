@@ -143,6 +143,9 @@
        */
       reset() {
         this.queryParams = {}
+        this.$nextTick(function () {
+          this.refresh()
+        })
       },
       /**
        * 添加弹出框

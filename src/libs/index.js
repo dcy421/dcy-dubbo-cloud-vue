@@ -345,3 +345,12 @@ export function removeClass(ele, cls) {
     ele.className = ele.className.replace(reg, ' ')
   }
 }
+
+/**
+ * 判断不为空
+ * @param str
+ * @returns {boolean|boolean}
+ */
+export function isNotEmpty(str) {
+  return str !== null && str !== '';
+}
